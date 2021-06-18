@@ -10,15 +10,26 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-        style: ElevatedButton.styleFrom(minimumSize: Size(100, 42)),
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(100, 100),
+          primary: Colors.white,
+          shape: CircleBorder(side: BorderSide(color: Colors.white)),
+        ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.more_time, size: 28),
-            const SizedBox(width: 8),
+            Icon(
+              Icons.more_time,
+              size: 28,
+              color: Colors.black,
+            ),
+            const SizedBox(width: 4),
             Text(
-              'start timer',
-              style: TextStyle(fontSize: 20),
+              'Start',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+              ),
             ),
           ],
         ),

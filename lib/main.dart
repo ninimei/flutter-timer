@@ -1,4 +1,4 @@
-import 'package:cupertino_datepicker_example/page/timer_picker_page.dart';
+import 'package:cupertino_datepicker_example/page/timer_page.dart';
 import 'package:cupertino_datepicker_example/widget/tabbar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +15,13 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'Timer';
+  static final String title = 'Clock App';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: title,
-        theme: ThemeData(primarySwatch: Colors.red),
+        theme: new ThemeData(scaffoldBackgroundColor: const Color(0x000000)),
         home: MainPage(),
       );
 }
@@ -34,11 +34,15 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) => TabBarWidget(
-        title: 'Timer',
+        title: 'Clock App',
         tabs: [
+          Tab(icon: Icon(Icons.timer), text: 'Clock'),
+          Tab(icon: Icon(Icons.timer), text: 'Stopwatch'),
           Tab(icon: Icon(Icons.timer), text: 'Timer'),
         ],
         children: [
+          TimerPickerPage(),
+          TimerPickerPage(),
           TimerPickerPage(),
         ],
       );

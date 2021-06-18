@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cupertino_datepicker_example/utils.dart';
 import 'package:cupertino_datepicker_example/widget/button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +11,14 @@ class TimerPickerPage extends StatefulWidget {
 }
 
 class _TimerPickerPageState extends State<TimerPickerPage> {
-  Duration duration = Duration(hours: 1, minutes: 6, seconds: 30);
-  int _seconds = 30;
-  int _minutes = 6;
-  int _hours = 1;
+  Duration duration = Duration(hours: 0, minutes: 0, seconds: 0);
+  int _seconds = 0;
+  int _minutes = 0;
+  int _hours = 0;
   String _textHolder = 'Start';
   Timer? _timer;
+  Color _colorPauseButton = Colors.black;
+
   var f = NumberFormat("00");
 
   void _stopTimer() {
@@ -62,6 +63,10 @@ class _TimerPickerPageState extends State<TimerPickerPage> {
     });
   }
 
+  Color getPauseButtonColor() {
+    return _colorPauseButton;
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
@@ -76,9 +81,11 @@ class _TimerPickerPageState extends State<TimerPickerPage> {
                 _seconds = duration.inSeconds.remainder(60);
 
                 _startTimer();
+
+                _colorPauseButton = Colors.white;
               }),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +94,7 @@ class _TimerPickerPageState extends State<TimerPickerPage> {
                   Text(
                     "${f.format(_hours)} : ${f.format(_minutes)} : ${f.format(_seconds)}",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 48,
                     ),
                   ),
@@ -103,15 +110,15 @@ class _TimerPickerPageState extends State<TimerPickerPage> {
                     onPressed: () {
                       _startTimer();
                     },
-                    color: Colors.orange[300],
-                    shape: CircleBorder(side: BorderSide(color: Colors.orange)),
+                    color: getPauseButtonColor(),
+                    shape: CircleBorder(side: BorderSide(color: Colors.black)),
                     child: Padding(
-                      padding: const EdgeInsets.all(36.0),
+                      padding: const EdgeInsets.all(38.0),
                       child: Text(
                         '$_textHolder',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
+                          color: Colors.black,
+                          fontSize: 21,
                         ),
                       ),
                     ),
@@ -124,14 +131,18 @@ class _TimerPickerPageState extends State<TimerPickerPage> {
       );
 
   Widget buildTimePicker() => SizedBox(
-        height: 180,
-        child: CupertinoTimerPicker(
-          initialTimerDuration: duration,
-          mode: CupertinoTimerPickerMode.hms,
-          minuteInterval: 1,
-          secondInterval: 1,
-          onTimerDurationChanged: (duration) =>
-              setState(() => this.duration = duration),
+        child: DefaultTextStyle.merge(
+          // style: TextStyle(fontSize: 20, color: Colors.white),
+          child: CupertinoTimerPicker(
+            backgroundColor: Colors.blue[100],
+            initialTimerDuration: duration,
+            mode: CupertinoTimerPickerMode.hms,
+            minuteInterval: 1,
+            secondInterval: 1,
+            onTimerDurationChanged: (duration) =>
+                setState(() => this.duration = duration),
+          ),
         ),
+        height: 180,
       );
 }

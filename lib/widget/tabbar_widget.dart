@@ -21,11 +21,12 @@ class TabBarWidget extends StatelessWidget {
             centerTitle: true,
             flexibleSpace: Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue, Colors.yellow],
-                  begin: Alignment.bottomRight,
-                  end: Alignment.topLeft,
-                ),
+                color: Colors.black,
+                // gradient: LinearGradient(
+                //   colors: [Colors.blue, Colors.yellow],
+                //   begin: Alignment.bottomRight,
+                //   end: Alignment.topLeft,
+                // ),
               ),
             ),
             bottom: TabBar(
